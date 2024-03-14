@@ -2,8 +2,8 @@ import { View, Text, Button } from "react-native";
 import { useEffect } from "react";
 import { useRouter } from "expo-router";
 
-import services from "../utils/services";
-import { client } from "../utils/KindeConfig";
+import services from "../../utils/services";
+import { client } from "../../utils/KindeConfig";
 
 export default function Home() {
   const router = useRouter();
@@ -11,9 +11,9 @@ export default function Home() {
   const handleLogout = async () => {
     const loggedOut = await client.logout(true);
     if (loggedOut) {
-      // User was logged out
       await services.storeData("login", "false");
       router.replace("/login");
+      // User was logged out
     }
   };
 
