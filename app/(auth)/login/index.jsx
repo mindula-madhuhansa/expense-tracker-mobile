@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 import loginBg from "../../../assets/images/loginbg.png";
 import Colors from "../../../utils/Colors";
-import { client } from "../../../utils/KindeConfig";
+import { client } from "../../../utils/kinde";
 import services from "../../../utils/services";
 import { useRouter } from "expo-router";
 
