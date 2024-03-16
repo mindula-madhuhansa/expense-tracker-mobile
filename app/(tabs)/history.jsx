@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 
-export default function Hostory() {
+export default function History() {
   return (
     <View>
-      <Text>Hostory</Text>
+      <Text>History</Text>
     </View>
   );
 }

@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import { Link, useRouter } from "expo-router";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Header from "../../components/Header";
 import Chart from "../../components/Chart";
@@ -92,7 +92,7 @@ export default function Home() {
       </ScrollView>
 
       <Link href={"/category-modal"} style={styles.buttonContainer}>
-        <FontAwesome name="plus-circle" size={54} color={Colors.PRIMARY} />
+        <Ionicons name="add-circle" size={60} color={Colors.PRIMARY} />
       </Link>
     </View>
   );

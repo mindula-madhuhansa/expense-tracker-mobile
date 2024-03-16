@@ -52,7 +52,12 @@ export default function CategoryInfo({ categoryDetail }) {
       </View>
 
       <View style={styles.progressBarMainContainer}>
-        <View style={[styles.progressBarSubContainer, { width: `40%` }]}></View>
+        <View
+          style={[
+            styles.progressBarSubContainer,
+            { width: percentageTotal + "%" },
+          ]}
+        ></View>
       </View>
     </View>
   );
