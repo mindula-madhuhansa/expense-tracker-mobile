@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "85%",
   },
-  welcomeText: { color: Colors.WHITE, fontSize: 16, fontFamily: "montserrat" },
-  nameText: { color: Colors.WHITE, fontSize: 20, fontFamily: "montserratBold" },
+  welcomeText: { color: Colors.WHITE, fontSize: 16 },
+  nameText: { color: Colors.WHITE, fontSize: 20 },
 });

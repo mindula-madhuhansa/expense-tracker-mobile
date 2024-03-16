@@ -12,8 +12,8 @@ export default function Chart() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 20, fontFamily: "montserrat" }}>
-        Total Estimate: <Text style={{ fontFamily: "montserratBold" }}>0$</Text>
+      <Text style={{ fontSize: 20 }}>
+        Total Estimate: <Text style={{ fontWeight: "bold" }}>$ 0</Text>
       </Text>
       <View style={styles.subContainer}>
         <PieChart

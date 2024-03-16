@@ -7,6 +7,7 @@ import {
   Text,
   ToastAndroid,
 } from "react-native";
+import { useRouter } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 import ColorPicker from "../components/ColorPicker";
@@ -16,6 +17,8 @@ import { supabase } from "../utils/supabase";
 import { client } from "../utils/kinde";
 
 export default function CategoryModal() {
+  const router = useRouter();
+
   const [selectedIcon, setSelectedIcon] = useState("IC");
   const [selectedColor, setSelectedColor] = useState(Colors.PRIMARY);
   const [categoryName, setCategoryName] = useState();
@@ -39,6 +42,12 @@ export default function CategoryModal() {
 
     if (data) {
       ToastAndroid.show("Category created!", ToastAndroid.SHORT);
+      router.replace({
+        pathname: "/category-detail",
+        params: {
+          categoryId: data[0].id,
+        },
+      });
     }
   };
 

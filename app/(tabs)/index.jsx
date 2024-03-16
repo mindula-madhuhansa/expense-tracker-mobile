@@ -1,10 +1,17 @@
-import { StyleSheet, View } from "react-native";
-import { useEffect } from "react";
+import {
+  ActivityIndicator,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
+import { useEffect, useState } from "react";
 import { Link, useRouter } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import Header from "../../components/Header";
 import Chart from "../../components/Chart";
+import CategoryList from "../../components/CategoryList";
 
 import services from "../../utils/services";
 import { client } from "../../utils/kinde";
@@ -14,9 +21,12 @@ import Colors from "../../utils/Colors";
 export default function Home() {
   const router = useRouter();
 
+  const [categoryList, setCategoryList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     checkUserAuth();
-    getCategoryList;
+    getCategoryList();
   }, []);
 
   const handleLogout = async () => {
@@ -30,17 +40,22 @@ export default function Home() {
   };
 
   const getCategoryList = async () => {
+    setLoading(true);
+    const user = await client.getUserDetails();
+
     const { data, error } = await supabase
       .from("categories")
-      .select("*")
+      .select("*, category_items(*)")
       .eq("created_by", user.email);
 
-    console.log("Data:", data);
+    setCategoryList(data);
+    data && setLoading(false);
   };
 
   // Check user authenticated or not
   const checkUserAuth = async () => {
     const result = await services.getData("login");
+
     if (result !== "true") {
       router.replace("/login");
     }
@@ -53,18 +68,30 @@ export default function Home() {
         flex: 1,
       }}
     >
-      <View
-        style={{
-          padding: 20,
-          backgroundColor: Colors.PRIMARY,
-          height: 150,
-        }}
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            onRefresh={() => getCategoryList()}
+            refreshing={loading}
+          />
+        }
       >
-        <Header />
-        <Chart />
-      </View>
+        <View
+          style={{
+            padding: 20,
+            backgroundColor: Colors.PRIMARY,
+            height: 150,
+          }}
+        >
+          <Header />
+        </View>
+        <View style={{ padding: 20, marginTop: -75 }}>
+          <Chart />
+          <CategoryList categoryList={categoryList} />
+        </View>
+      </ScrollView>
 
-      <Link href={"/categoryModal"} style={styles.buttonContainer}>
+      <Link href={"/category-modal"} style={styles.buttonContainer}>
         <FontAwesome name="plus-circle" size={54} color={Colors.PRIMARY} />
       </Link>
     </View>
